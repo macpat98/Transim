@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Transim",
+  "version": "1.0",
+  "description": "Instant text translation",
+  "permissions": ["activeTab"],
+  "host_permissions": ["https://translate.googleapis.com/"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.js"]
+    }
+  ]
+}
