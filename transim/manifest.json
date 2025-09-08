@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Transim",
+  "name": "Transim BETA",
   "version": "1.0",
-  "description": "Instant text translation",
+  "description": "Instant text translation. THIS EXTENSION IS FOR BETA TESTING",
   "permissions": ["activeTab"],
   "host_permissions": ["https://translate.googleapis.com/"],
   "background": {
