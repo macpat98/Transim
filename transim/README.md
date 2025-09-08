@@ -1,11 +1,11 @@
-# chrome-translator-extension
+# transim
 
 This project is a Google Chrome extension that translates selected text on web pages. It captures the user's selection and provides a translation through a popup interface.
 
 ## Project Structure
 
 ```
-chrome-translator-extension
+transim
 ├── src
 │   ├── background.js        # Background script for managing the extension's lifecycle
 │   ├── content.js          # Content script for interacting with web pages
@@ -22,7 +22,7 @@ chrome-translator-extension
 1. Clone the repository or download the source code.
 2. Open Chrome and navigate to `chrome://extensions/`.
 3. Enable "Developer mode" in the top right corner.
-4. Click on "Load unpacked" and select the `chrome-translator-extension` directory.
+4. Click on "Load unpacked" and select the `transim` directory.
 
 ## Usage
 
