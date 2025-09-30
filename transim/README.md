@@ -14,7 +14,8 @@ transim
 │       ├── popup.js        # JavaScript for handling popup interactions
 │       └── popup.css       # Styles for the popup
 ├── manifest.json           # Configuration file for the Chrome extension
-└── README.md               # Documentation for the project
+├── TECHNICAL.md           # Technical documentation
+└── README.md              # Project overview and usage instructions
 ```
 
 ## Installation
@@ -29,6 +30,11 @@ transim
 1. Select any text on a web page.
 2. Click on the extension icon in the Chrome toolbar.
 3. The popup will display the translated text.
+
+## Documentation
+
+- For end-users: See the Usage section above.
+- For developers: Check [TECHNICAL.md](TECHNICAL.md) for detailed technical documentation.
 
 ## Contributing
 

@@ -6,31 +6,6 @@ body {
   width: 300px;
 }
 
-h1 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-#translated-text {
-  font-size: 16px;
-  color: #333;
-  margin-top: 10px;
-}
-
-button {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin: 10px 0;
-}
-
-button:hover {
-  background-color: #2980b9;
-}
-
 .container {
   width: 250px;
   padding: 15px;
@@ -41,45 +16,6 @@ h2 {
   color: #2c3e50;
   margin: 0 0 15px 0;
   font-size: 16px;
-}
-
-p {
-  color: #34495e;
-  margin-bottom: 10px;
-}
-
-ol {
-  padding-left: 20px;
-  color: #34495e;
-}
-
-li {
-  margin-bottom: 8px;
-}
-
-#popup-container {
-  padding: 15px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 100px;
-  margin: 10px 0;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#translated-text-container {
-  margin-top: 15px;
-  padding: 10px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-#translated-text {
-  margin: 0;
-  word-wrap: break-word;
 }
 
 .language-selector {
