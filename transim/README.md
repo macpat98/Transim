@@ -36,6 +36,10 @@ transim
 - For end-users: See the Usage section above.
 - For developers: Check [TECHNICAL.md](TECHNICAL.md) for detailed technical documentation.
 
+## Privacy Policy
+
+For details on how user data is handled, please refer to [privacy-policy.md](privacy-policy.md).
+
 ## Contributing
 
 Feel free to submit issues or pull requests for improvements or bug fixes.
