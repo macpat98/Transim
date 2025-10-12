@@ -56,11 +56,16 @@ async function translateText(text, targetLang) {
 
     const data = await response.json();
 
-    if (!data || !data[0] || !data[0][0] || !data[0][0][0]) {
+    if (!data || !data[0]) {
       throw new Error("Invalid response format from translation service");
     }
 
-    return data[0][0][0];
+    const translatedText = data[0]
+      .filter((segment) => segment && segment[0])
+      .map((segment) => segment[0])
+      .join("");
+
+    return translatedText;
   } catch (error) {
     console.error("Translation error:", error);
     throw error;

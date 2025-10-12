@@ -6,6 +6,17 @@ let targetLanguage = "pl";
 // Variable to track extension state
 let extensionActive = true;
 
+// Add CSS file for translation popup
+function addTranslationPopupStyles() {
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = chrome.runtime.getURL("src/popup/translation-popup.css");
+  document.head.appendChild(link);
+}
+
+// Initialize styles
+addTranslationPopupStyles();
+
 // Function for safe message sending
 async function safeSendMessage(message) {
   if (!extensionActive) return;
@@ -40,6 +51,7 @@ document.addEventListener("mouseup", async (event) => {
       const selection = window.getSelection();
       const range = selection.getRangeAt(0);
       const rect = range.getBoundingClientRect();
+      const center = rect.left + rect.width / 2;
 
       const response = await chrome.runtime.sendMessage({
         action: "translate",
@@ -47,11 +59,7 @@ document.addEventListener("mouseup", async (event) => {
       });
 
       if (response && response.translatedText) {
-        showTranslationPopup(
-          response.translatedText,
-          rect.left + window.scrollX,
-          rect.top + window.scrollY - 30
-        );
+        showTranslationPopup(response.translatedText, center, rect.top);
       }
     } catch (error) {
       console.error("Translation error:", error);
@@ -91,27 +99,68 @@ function showTranslationPopup(translation, x, y) {
     existingPopup.remove();
   }
 
+  // Get current selection info
+  const selection = window.getSelection();
+  const range = selection.getRangeAt(0);
+  const selectionRect = range.getBoundingClientRect();
+
   const popup = document.createElement("div");
   popup.className = "translation-popup";
   popup.textContent = translation;
-  popup.style.cssText = `
-        position: absolute;
-        left: ${x}px;
-        top: ${y}px;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 3px;
-        font-size: 14px;
-        max-width: 300px;
-        z-index: 999999;
-        pointer-events: none;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        transform: translateY(-100%);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    `;
 
+  // Initially hide the popup but keep it in the layout
+  popup.style.visibility = "hidden";
   document.body.appendChild(popup);
+
+  // Get the dimensions after adding to DOM
+  const popupWidth = popup.offsetWidth;
+  const popupHeight = popup.offsetHeight;
+
+  // Calculate the center position of the selection
+  const selectionCenter = selectionRect.left + selectionRect.width / 2;
+
+  // Calculate initial position
+  let finalX = selectionCenter - popupWidth / 2 + window.scrollX;
+  let finalY = selectionRect.top + window.scrollY;
+
+  // Ensure popup stays within viewport
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+
+  // Adjust horizontal position if needed
+  if (finalX < window.scrollX) {
+    finalX = window.scrollX + 10;
+  } else if (finalX + popupWidth > window.scrollX + viewportWidth) {
+    finalX = window.scrollX + viewportWidth - popupWidth - 10;
+  }
+
+  // Adjust vertical position
+  // First try to position above the selection
+  if (selectionRect.top - popupHeight - 10 > 0) {
+    // Enough space above
+    finalY = selectionRect.top + window.scrollY - popupHeight - 10;
+  } else if (selectionRect.bottom + popupHeight + 10 < viewportHeight) {
+    // Try below if not enough space above
+    finalY = selectionRect.bottom + window.scrollY + 10;
+  } else {
+    // If no good space above or below, prefer above if possible
+    finalY = Math.max(
+      window.scrollY + 10,
+      selectionRect.top + window.scrollY - popupHeight - 10
+    );
+  }
+
+  // Apply final position and show popup
+  popup.style.left = `${finalX}px`;
+  popup.style.top = `${finalY}px`;
+  popup.style.visibility = "visible";
+
+  // Add smooth fade-in effect
+  popup.style.opacity = "0";
+  popup.style.transition = "opacity 0.2s ease-in-out";
+  requestAnimationFrame(() => {
+    popup.style.opacity = "1";
+  });
 }
 
 // Listen for messages from the background script

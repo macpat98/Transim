@@ -5,6 +5,12 @@
   "description": "Instant text translation. THIS EXTENSION IS FOR BETA TESTING",
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["https://translate.googleapis.com/"],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/popup/translation-popup.css"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "background": {
     "service_worker": "src/background.js"
   },
