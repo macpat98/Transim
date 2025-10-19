@@ -36,9 +36,16 @@ transim
 - For end-users: See the Usage section above.
 - For developers: Check [TECHNICAL.md](TECHNICAL.md) for detailed technical documentation.
 
-## Privacy Policy
+## Privacy & Permissions
 
-For details on how user data is handled, please refer to [privacy-policy.md](privacy-policy.md).
+The extension requires minimal permissions to function:
+
+- Storage permission to save your target language preference
+- Access to translate.googleapis.com for translation functionality
+
+No tab-specific permissions are needed as the extension works through content scripts.
+
+See [privacy-policy.md](privacy-policy.md) for details on how user data is handled.
 
 ## Contributing
 

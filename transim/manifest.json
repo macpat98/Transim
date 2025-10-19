@@ -3,7 +3,7 @@
   "name": "Transim BETA",
   "version": "1.0",
   "description": "Instant text translation. THIS EXTENSION IS FOR BETA TESTING",
-  "permissions": ["activeTab", "storage"],
+  "permissions": ["storage"],
   "host_permissions": ["https://translate.googleapis.com/"],
   "web_accessible_resources": [
     {
